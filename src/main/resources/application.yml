@@ -1,0 +1,59 @@
+#
+# Global setting
+###########################################
+spring:
+  profiles:
+    active: local
+  application:
+    name: enbiz-gw
+
+management:
+  health:
+    defaults:
+      enabled: false
+  endpoint:
+    health:
+      show-details: never
+      show-components: never
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+---
+#
+# LOCAL Setting
+###########################################
+server:
+  port: 8081
+    
+spring:
+  config:
+    activate:
+      on-profile: local
+  zipkin:
+    enabled: false
+
+app:
+  apiUrl:
+    sample: http://localhost:8090
+
+---
+#
+# DEV Setting
+###########################################
+server:
+  port: 9022
+    
+spring:
+  config:
+    activate:
+      on-profile: dev
+  zipkin:
+    enabled: false
+
+app:
+  apiUrl:
+    sample: http://enbiz-api-sample-svc
+    
